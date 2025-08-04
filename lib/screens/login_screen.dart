@@ -43,6 +43,18 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  void _googleSignIn() async {
+    setState(() {
+      _isLoading = true;
+    });
+    _authService.signInWithGoogle();
+    if (mounted) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   void passvisiblity() {
     setState(() {
       _obsecure = !_obsecure;
@@ -163,6 +175,29 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               child: const Text("LOGIN"),
                             ),
+                      const SizedBox(height: 24),
+                      Row(
+                        children: [
+                          Expanded(child: Divider(color: Colors.grey.shade300)),
+                        ],
+                      ),
+                      const SizedBox(height: 24),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          _googleSignIn();
+                        },
+                        icon: Image.asset('assets/google_logo.png', height: 22),
+                        label: Text("Sign in with Google"),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.black87,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(12),
+                          ),
+                          side: BorderSide(color: Colors.grey.shade300),
+                        ),
+                      ),
                       const SizedBox(height: 16),
                       TextButton(
                         onPressed: () {
