@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "404662972712-dvisagstvj2kbbhked5ed6pnv3grq530.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.photo_journal_app",
+            "certificate_hash": "21a36781190dc1a8aa35d001d70e9ff87dc3d5d8"
+          }
+        },
+        {
           "client_id": "404662972712-4bhk209tcl1rf9emdn5rsusr13e6r3gb.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "404662972712-4bhk209tcl1rf9emdn5rsusr13e6r3gb.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "404662972712-3vi363nvcelltdvsfu1et7bvkeo2mrr4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.photoJournalApp"
+              }
             }
           ]
         }
