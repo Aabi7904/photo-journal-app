@@ -14,6 +14,17 @@ class FirerstoreService {
     return _db.collection('users').doc(user.uid).set(user.toMap());
   }
 
+  // NOW WE GONNA CREATE THREE METHODS
+  // 1. to get the entries from firestore(we will use this method in homepage to show the ui)
+  //2. to add and save to firestore(use in add entry page when click saved thi method is called and entry saved to firestore) 
+  //3. delete entry from firestore
+
+  // here we uses stream to get live updates
+  //list type and jornal entry model
+  //return form _db using collection entries
+  //using where will get the specific user id
+  //snapshot will have the data
+  //creating it as a jornal entry model object and making it as a list type
   Stream<List<JournalEntry>> getEntries(String userId) {
     return _db
         .collection('entries')
@@ -26,6 +37,9 @@ class FirerstoreService {
               .toList(),
         );
   }
+
+  //this is to add the entry and save to firebase
+  //it will add all the entries to the 'entries' collection 
 
   Future<void> addEntry({
     required String userId,

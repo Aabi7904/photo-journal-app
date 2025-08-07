@@ -35,7 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: StreamBuilder<List<JournalEntry>>(
         // Listen to the stream of entries from Firestore
+        //it will get the userids entry alone
         stream: _firestoreService.getEntries(currentUser!.uid),
+        //tis will build the data using snapshot
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -53,11 +55,14 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
 
+          //stores the data in entries
+          //returning as a list od cards using cutom made widget 
           final entries = snapshot.data!;
           return ListView.builder(
             padding: const EdgeInsets.all(16.0),
             itemCount: entries.length,
             itemBuilder: (context, index) {
+              //this entry will have the each index data to build seperate cards
               final entry = entries[index];
               return _buildEntryCard(entry);
             },
@@ -77,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  //custom widget card to show the entry
   Widget _buildEntryCard(JournalEntry entry) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16.0),
