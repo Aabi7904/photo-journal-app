@@ -41,12 +41,21 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
   Future<void> _saveEntry() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
+      try{
 
       String? imageUrl;
       // 1. If an image was selected, upload it first
       if (_selectedImage != null) {
         imageUrl = await _storageService.uploadImage(_selectedImage!);
+        if (imageUrl == null) {
+          // Handle upload failure
+          showToast("Error: Image could not be uploaded.", position: ToastPosition.bottom);
+          setState(() => _isLoading = false);
+          return; // Stop the process if upload fails
+        }
+        showToast("Image Upload Successful! URL: $imageUrl");
       }
+      showToast("Firestore save successful!");
 
       // 2. Save the journal entry to Firestore
       await _firerstoreService.addEntry(
@@ -63,7 +72,16 @@ class _AddEntryScreenState extends State<AddEntryScreen> {
         Navigator.of(context).pop();
       }
     }
-  }
+    catch (e) {
+      // If any error occurs in the process, it will be caught here
+      showToast("!! AN ERROR OCCURRED: $e");
+      showToast("An unexpected error occurred. Please try again.", position: ToastPosition.bottom);
+      if (mounted) {
+        setState(() => _isLoading = false);
+     
+  }}
+    }
+    }
 
   @override
   void dispose() {

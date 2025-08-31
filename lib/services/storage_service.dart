@@ -1,15 +1,14 @@
-//this helps to use files form mobile
 import 'dart:io';
 import 'package:cloudinary_public/cloudinary_public.dart';
-//instead of print we use logger package
 import 'package:logger/logger.dart';
 
 class StorageService {
   final logger = Logger();
-  // IMPORTANT: Replace these with your actual Cloudinary credentials
+  
+  // IMPORTANT: Make sure these credentials are correct
   final CloudinaryPublic _cloudinary = CloudinaryPublic(
-    'djljxq1dhs', // <-- Replace with your Cloud Name
-    'ml_default', // <-- Replace with your Upload Preset
+    'djixq1dhs', // <-- Your Cloud Name
+    'ml_default', // <-- Your Upload Preset
     cache: false,
   );
 
@@ -17,9 +16,7 @@ class StorageService {
   Future<String?> uploadImage(File imageFile) async {
     try {
       // Upload the file to Cloudinary
-      //HERE WE upload the image file to cloudinary
       CloudinaryResponse response = await _cloudinary.uploadFile(
-        //this will upload your image into a cloudinary accceptable file
         CloudinaryFile.fromFile(
           imageFile.path,
           resourceType: CloudinaryResourceType.Image,
@@ -28,8 +25,10 @@ class StorageService {
       // Return the secure URL of the uploaded image
       return response.secureUrl;
     } on CloudinaryException catch (e) {
-      logger.e("Error uploading image: ${e.message}");
+      // Use the logger to print the detailed error
+      logger.e("Cloudinary Error: ${e.message}");
       return null;
     }
   }
 }
+
