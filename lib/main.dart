@@ -23,14 +23,17 @@ class MyApp extends StatelessWidget {
         title: "Photo Journal",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
-          scaffoldBackgroundColor: const Color(0Xfff5f5f5),
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black87,
-            elevation: 1,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFF3A4E7A),
+            primary: const Color(0xFF3A4E7A),
+            secondary: const Color(0xFF00ADB5),
+            surface: Colors.white,
+            onPrimary: Colors.white,
+            onSecondary: Colors.white,
+            onSurface: const Color(0xFF222831),
           ),
-          textTheme: GoogleFonts.latoTextTheme(),
+
+          textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
           useMaterial3: true,
         ),
         home: const AuthGate(),
